@@ -113,10 +113,13 @@ const MesclarPlanilhas = () => {
       toast.success("Planilha mesclada com sucesso!");
     } catch (error) {
       console.error(error);
-
-      toast.error(
-        "Ocorreu um erro ao mesclar planilhas, por favor tente novamente mais tarde",
-      );
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error(
+          "Ocorreu um erro ao mesclar a planilha, por favor tente novamente mais tarde",
+        );
+      }
     }
     setLoading(false);
   };
